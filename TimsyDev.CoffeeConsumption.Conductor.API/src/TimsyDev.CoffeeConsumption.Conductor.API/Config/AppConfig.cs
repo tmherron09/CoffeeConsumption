@@ -4,7 +4,7 @@
     {
         string WithOrigins { get; set; }
     }
-    public class AppConfig: IAppConfig
+    public class AppConfig : IAppConfig
     {
         public string WithOrigins { get; set; }
     }

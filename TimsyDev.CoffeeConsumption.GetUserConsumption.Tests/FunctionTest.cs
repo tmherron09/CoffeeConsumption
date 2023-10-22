@@ -1,6 +1,5 @@
-using Xunit;
-using Amazon.Lambda.Core;
 using Amazon.Lambda.TestUtilities;
+using Xunit;
 
 namespace TimsyDev.CoffeeConsumption.GetUserConsumption.Tests;
 

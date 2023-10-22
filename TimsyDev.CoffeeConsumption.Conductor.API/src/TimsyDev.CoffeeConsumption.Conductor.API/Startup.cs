@@ -1,9 +1,18 @@
 ﻿using Amazon.DynamoDBv2;
 using Amazon.Extensions.NETCore.Setup;
 using CoffeeConsumption.Conductor.API.Config;
+using CoffeeConsumption.Shared.Services;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Formatting.Compact;
+using System;
+using TimsyDev.CoffeeConsumption.Shared.Config;
+using TimsyDev.CoffeeConsumption.Shared.Data;
 using ILogger = Serilog.ILogger;
 
 namespace TimsyDev.CoffeeConsumption.Conductor.API
@@ -13,6 +22,7 @@ namespace TimsyDev.CoffeeConsumption.Conductor.API
         public static IConfiguration Configuration { get; private set; }
 
         private AWSOptions _awsOptions;
+        private CoffeeConsumptionDynamoConfig _dynamoConfig;
         private readonly string _corsPolicy = "_allowTestAllOrigins";
 
         public Startup(IConfiguration configuration)
@@ -27,10 +37,18 @@ namespace TimsyDev.CoffeeConsumption.Conductor.API
             services.AddControllers();
 
             _awsOptions = Configuration.GetAWSOptions();
+            _dynamoConfig = Configuration
+                .GetSection("AWSDynamoDBConfig")
+                .Get<CoffeeConsumptionDynamoConfig>() ?? throw new InvalidOperationException($"Error: Appsettings.EnvService.EnvironmentName.json Missing \"AWSDynamoDBConfig\" Section");
 
 
             services.AddDefaultAWSOptions(_awsOptions);
+            services.AddSingleton<ICoffeeConsumptionDynamoConfig>(_dynamoConfig);
             services.AddAWSService<IAmazonDynamoDB>();
+
+            services.AddSingleton<ICoffeeDrinkService, CoffeeDrinkService>();
+            services.AddSingleton<ICoffeeDrinkerDataService, CoffeeDrinkDataService>();
+            services.AddSingleton<IMockDataService, MockDataService>();
 
             var loggerConfig = new LoggerConfiguration()
                 .ReadFrom.Configuration(Configuration)
@@ -97,7 +115,7 @@ namespace TimsyDev.CoffeeConsumption.Conductor.API
 
                 app.UseRouting();
 
-                
+
                 //app.UseAuthorization();
 
                 app.UseEndpoints(endpoints =>

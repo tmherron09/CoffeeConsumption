@@ -2,14 +2,14 @@
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net6.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
+		<!--<Nullable>enable</Nullable>-->
 		<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
 		<AWSProjectType>Lambda</AWSProjectType>
 		<!-- This property makes the build directory similar to a publish directory and helps the AWS .NET Lambda Mock Test Tool find project dependencies. -->
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 		<!-- Generate ready to run images during publishing to improve cold start time. -->
 		<PublishReadyToRun>true</PublishReadyToRun>
+		<UserSecretsId>af0a8f1b-cd06-4aa3-8b89-049b0f5d1c4d</UserSecretsId>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Amazon.Lambda.AspNetCoreServer" Version="8.1.0" />
@@ -26,5 +26,8 @@
 		<PackageReference Include="Serilog.Formatting.Compact" Version="1.1.0" />
 		<PackageReference Include="Serilog.Settings.Configuration" Version="7.0.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\TimsyDev.CoffeeConsumption.Shared\CoffeeConsumption.Shared.csproj" />
 	</ItemGroup>
 </Project>

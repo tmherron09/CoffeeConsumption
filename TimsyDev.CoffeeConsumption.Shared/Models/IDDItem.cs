@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TimsyDev.CoffeeConsumption.Shared.Models
+﻿namespace TimsyDev.CoffeeConsumption.Shared.Models
 {
     // IDynamoDBItem
     public interface IDDItem

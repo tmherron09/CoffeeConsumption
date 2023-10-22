@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TimsyDev.CoffeeConsumption.Shared.Models
 {
@@ -10,5 +6,11 @@ namespace TimsyDev.CoffeeConsumption.Shared.Models
     {
         public string DrinkName { get; set; }
         public List<decimal> Data { get; set; } = new List<decimal>();
+
+        public CoffeeDrink(string drinkName, List<decimal> data)
+        {
+            DrinkName = drinkName;
+            Data = data;
+        }
     }
 }

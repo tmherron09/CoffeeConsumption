@@ -10,7 +10,7 @@ public class Function
 
     public Function()
     {
-        
+
     }
 
     /// <summary>

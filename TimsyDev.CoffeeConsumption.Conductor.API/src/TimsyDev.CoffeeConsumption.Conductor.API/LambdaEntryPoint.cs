@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 namespace TimsyDev.CoffeeConsumption.Conductor.API
 {
